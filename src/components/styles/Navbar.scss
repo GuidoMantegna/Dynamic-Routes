@@ -1,0 +1,58 @@
+@use '../../styles/modules/colors';
+
+.navbar-main-container {
+    background-color: colors.$yellow;
+}
+
+.navbar {
+    background-color: colors.$yellow;
+}
+
+.logo {
+    width: 120px;
+}
+
+.navbar-toggler {
+    padding: .25rem .25rem;
+    font-size: 1rem;
+}
+
+.main-nav {
+    // display: none;
+    background-color: rgb(60, 60, 60);
+}
+
+.btn-burguer {
+    background-color: rgba(255, 255, 255, .5);
+    border-radius: 50%;
+    padding: 5px 10px;
+    font-weight: bold;
+}
+
+.categories-dropdown {
+    position: absolute;
+    background-color: rgb(60, 60, 60);
+    border-radius: 5px;
+    display: none;
+}
+
+.categories-dropdown::after {
+    content: '';
+        position: absolute;
+        width: 0; 
+        height: 0; 
+        top: -5px;
+        left: 35%;
+        border-left: 5px solid transparent;
+        border-right: 5px solid transparent;
+        border-bottom: 5px solid rgb(60, 60, 60);
+}
+
+@media screen and (min-width: 992px) {
+    .btn-burguer {
+        display: none;
+    }
+    .main-nav {
+        display: flex;
+    }
+}

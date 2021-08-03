@@ -1,0 +1,19 @@
+@use '/src/styles/modules/colors';
+
+a:link {
+  text-decoration: none;
+  color: colors.$link;
+}
+
+a:visited {
+  color: colors.$link-visited;
+}
+
+ul {
+  padding: 0;
+}
+
+li {
+  list-style: none;
+  
+}
