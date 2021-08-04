@@ -1,10 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import cardImg from '../assets/imgs/generic-product.jpg'
-import AppiRefs from '../components/AppiRefs';
-import Header from '../components/Header';
-import Navbar from '../components/Navbar';
-import Categories from '../components/Categories';
+// import AppiRefs from '../components/AppiRefs';
 
 const Home = () => {
     const { id } = useParams<{id: string}>();
@@ -12,8 +9,6 @@ const Home = () => {
     type Data = {
         id: string, 
         name: string,
-        // children_categories: {name: string, id:string}[],
-        // category: string;
     }
 
     const [data, setData] = useState<Data[]>([]);
@@ -34,7 +29,7 @@ const Home = () => {
             <ul className="categories-list row gy-3 p-2">
                 {data.map(cat => {
                     return (
-                        <Link to={`/MLA/${cat.id}`} className="card-group col-6 col-sm-4 col-xl-3" key={cat.id}>
+                        <Link to={`/${id}/${cat.id}`} className="card-group col-6 col-sm-4 col-xl-3" key={cat.id}>
                             <div className="card h-100">
                                 <img src={cardImg} className="card-img-top" alt="..."></img>
                                 <div className="card-body">

@@ -1,10 +1,11 @@
 import React from 'react';
 import Header from './Header';
 import Navbar from './Navbar';
+import './styles/Layout.scss'
 
 const Layout: React.FC = ({children}) => {
     return (
-        <div className="Layout_main-container h-100 bg-light">
+        <div className="Layout_main-container min-vh-100">
             <Header />
             <Navbar />
             <nav aria-label="breadcrumb">

@@ -1,9 +1,10 @@
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import './App.scss';
-import Category from './components/Category';
+import Landing from './pages/Landing';
 import Layout from './components/Layout';
 import Home from './pages/Home';
-import Landing from './pages/Landing';
+import SubCategories from './pages/SubCategories';
+import SearchResults from './pages/SearchResults';
 
 function App() {
   return (
@@ -12,7 +13,8 @@ function App() {
         <Route exact path="/" component={Landing} />
         <Layout>
           <Route exact path="/:id" component={Home} />
-          <Route exact path="/:id/:category" component={Category} />
+          <Route exact path="/:id/:category" component={SubCategories} />
+          <Route exact path="/:id/:category/:search" component={SearchResults} />
         </Layout>
       </Switch>
     </BrowserRouter>
