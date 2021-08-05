@@ -1,8 +1,24 @@
+@use '../../styles/modules/colors';
 
 .results-item {
     display: grid;
     grid-template-columns: 15% 85%;
 }
 
+.results-sort {
+    display: flex;
+    width: 100%;
+    justify-content: flex-end;
 
+    label {
+        font-weight: bold;
+    }
+}
 
+#sorting-options {
+    background-color: colors.$grey;
+}
+
+#sorting-options:focus {
+    outline: none;
+}
