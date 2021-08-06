@@ -4,6 +4,7 @@ import './styles/SearchResults.scss';
 import { Data } from '../interfaces/Data'
 import FilterPanel from '../components/FilterPanel'
 import SorterPanel from '../components/SorterPanel';
+import ResulstList from '../components/ResulstList';
 
 const SearchResults = () => {
 
@@ -42,6 +43,7 @@ const SearchResults = () => {
 
             <div className="col-9">
                 <SorterPanel results={results} data={data} handleSorters={handleSorters} />
+                <ResulstList results={results} />
             </div>
         </div>
         </>
