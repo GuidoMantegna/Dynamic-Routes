@@ -1,12 +1,15 @@
 @use '/src/styles/modules/colors';
 
 a:link {
-  text-decoration: none;
   color: colors.$link;
 }
 
 a:visited {
   color: colors.$link;
+}
+
+a, a:hover, a:link, a:visited {
+  text-decoration: none;
 }
 
 ul {
