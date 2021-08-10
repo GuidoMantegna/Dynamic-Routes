@@ -43,7 +43,9 @@ const FilterPanel: React.FC<Props> = ({ results, data, handleFilters }) => {
     const handleClick = (e: React.MouseEvent) => {
 
         let inputs: HTMLInputElement[] = Array.from(document.querySelectorAll('.input-filter'));
-        let selectedFilters: string[]  = inputs.filter(input => input.checked).map(input => input.id);
+        let selectedFilters: (string | undefined)[]  = inputs.filter(input => input.checked).map(input => input.dataset.info);
+
+        if(selectedFilters.length===0) {handleFilters(filteredArray)}
         
         for (let index = 0; index < selectedFilters.length; index++) {
             if(index === 0 ) {
@@ -52,7 +54,6 @@ const FilterPanel: React.FC<Props> = ({ results, data, handleFilters }) => {
                 filteredArray = filterFunc(selectedFilters[index], filteredArray)
             } 
         }
-        console.log(filteredArray)
 
         handleFilters(filteredArray)
     }
@@ -70,75 +71,75 @@ const FilterPanel: React.FC<Props> = ({ results, data, handleFilters }) => {
 
         <div className="filter-option-container">
             <p className="filter-title">Costo de envio</p>
-            <div>
+            <div className="d-flex">
                 <label className="filter-option">Gratis</label>
                 <span className="filter-qty">
                     ({filterFunc('gratis', data)?.length})
                 </span>
-                <input className="input-filter" type="checkbox" name="gratis" id="gratis" onClick={handleClick} />
-                {/* <div className="form-check form-switch">
+                {/* <input className="input-filter" type="checkbox" name="gratis" id="gratis" onClick={handleClick} /> */}
+                <div className="form-check form-switch ms-2">
                     <input className="form-check-input input-filter" type="checkbox" data-info="gratis" id="flexSwitchCheckDefault" onClick={handleClick}></input>
-                </div> */}
+                </div>
             </div>
         </div>
 
         <div className="filter-option-container">
             <p className="filter-title">Condicion</p>
 
-            <div>
+            <div className="d-flex">
                 <label className="filter-option">Nuevo</label>
                 <span className="filter-qty">
                     ({filterFunc('nuevo', data)?.length})
                 </span>
-                <input className="input-filter" type="checkbox" name="nuevo" id="nuevo" onClick={handleClick} />
-                {/* <div className="form-check form-switch">
+                {/* <input className="input-filter" type="checkbox" name="nuevo" id="nuevo" onClick={handleClick} /> */}
+                <div className="form-check form-switch ms-2">
                     <input className="form-check-input input-filter" type="checkbox" data-info="nuevo" id="flexSwitchCheckDefault" onClick={handleClick}></input>
-                </div> */}
+                </div>
             </div>
-            <div>
+            <div className="d-flex">
                 <label className="filter-option">Usado</label> 
                 <span className="filter-qty">
                     ({filterFunc('usado', data)?.length})
                 </span>
-                <input className="input-filter" type="checkbox" name="usado" id="usado" onClick={handleClick}/>
-                {/* <div className="form-check form-switch">
+                {/* <input className="input-filter" type="checkbox" name="usado" id="usado" onClick={handleClick}/> */}
+                <div className="form-check form-switch ms-2">
                     <input className="form-check-input input-filter" type="checkbox" data-info="usado" id="flexSwitchCheckDefault" onClick={handleClick}></input>
-                </div> */}
+                </div>
             </div>
         </div>
 
         <div className="filter-option-container">
             <p className="filter-title">Pago</p>
 
-            <div>
+            <div className="d-flex">
                 <label className="filter-option">Sin interés</label> 
                 <span className="filter-qty">
                     ({filterFunc('sin interes', data)?.length})
                 </span>
-                <input className="input-filter" type="checkbox" name="sin interes" id="sin interes" onClick={handleClick} />
-                {/* <div className="form-check form-switch">
+                {/* <input className="input-filter" type="checkbox" name="sin interes" id="sin interes" onClick={handleClick} /> */}
+                <div className="form-check form-switch ms-2">
                     <input className="form-check-input input-filter" type="checkbox" data-info="sin interes" id="flexSwitchCheckDefault" onClick={handleClick}></input>
-                </div> */}
+                </div>
             </div>
-            <div>
+            <div className="d-flex">
                 <label className="filter-option">0-6</label>
                 <span className="filter-qty">  
                     ({filterFunc('0-6', data)?.length})
                 </span>    
-                <input className="input-filter" type="checkbox" name="0-6" id="0-6" onClick={handleClick} />
-                {/* <div className="form-check form-switch">
+                {/* <input className="input-filter" type="checkbox" name="0-6" id="0-6" onClick={handleClick} /> */}
+                <div className="form-check form-switch ms-2">
                     <input className="form-check-input input-filter" type="checkbox" data-info="0-6" id="flexSwitchCheckDefault" onClick={handleClick}></input>
-                </div> */}
+                </div>
             </div>
-            <div>
+            <div className="d-flex">
                 <label className="filter-option">12 o más</label> 
                 <span className="filter-qty">
-                    ({filterFunc('12 o mas', data)?.length})
+                    ({filterFunc('6 o mas', data)?.length})
                 </span> 
-                <input className="input-filter" type="checkbox" name="12 0 mas" id="12 o mas" onClick={handleClick} />
-                {/* <div className="form-check form-switch">
-                    <input className="form-check-input input-filter" type="checkbox" data-info="12 o mas" id="flexSwitchCheckDefault" onClick={handleClick}></input>
-                </div> */}
+                {/* <input className="input-filter" type="checkbox" name="12 0 mas" id="12 o mas" onClick={handleClick} /> */}
+                <div className="form-check form-switch ms-2">
+                    <input className="form-check-input input-filter" type="checkbox" data-info="6 o mas" id="flexSwitchCheckDefault" onClick={handleClick}></input>
+                </div>
             </div>
         </div>
         </>

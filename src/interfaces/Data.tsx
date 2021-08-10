@@ -1,5 +1,6 @@
 export interface Data {
     id: string,
+    name: string;
     thumbnail: string,
     title: string,
     price: number,
