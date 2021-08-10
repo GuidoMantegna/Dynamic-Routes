@@ -1,6 +1,7 @@
 @use '../../styles/modules/colors';
 
 .results-item {
+    // max-height: 200px;
     display: grid;
     grid-template-columns: 15% 85%;
 }

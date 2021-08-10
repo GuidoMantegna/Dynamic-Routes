@@ -1,6 +1,31 @@
-import './styles/Navbar.scss'
+import './styles/Navbar.scss';
+import { Link, useParams } from 'react-router-dom';
+import { useState, useEffect } from 'react';
 
-const Navbar = () => {
+type Data = {
+    id: string, 
+    name: string
+}
+
+const Navbar: React.FC/*<Props>*/ = (/*{ data, id }*/) => {
+
+    const { id } = useParams<{id: string}>();
+
+    const [data, setData] = useState<Data[]>([]);
+
+    useEffect(() => {
+        fetchData(`https://api.mercadolibre.com/sites/${id}/categories`)
+
+        // contextData.id = id;
+    }, [])
+
+    async function fetchData(url:string) {
+        const getData = await fetch(url);
+        const data = await getData.json();
+        
+        setData(data)
+    }
+
     return (
       <>
         <nav className="navbar navbar-expand-lg navbar-light">
@@ -38,10 +63,14 @@ const Navbar = () => {
                                 Categorias
                             </a>
                             <ul className="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <li><a className="dropdown-item" href="#">Action</a></li>
-                                <li><a className="dropdown-item" href="#">Another action</a></li>
-                                <li><hr className="dropdown-divider"></hr></li>
-                                <li><a className="dropdown-item" href="#">Something else here</a></li>
+                                {data.map(cat => {
+                                    return (
+                                        <Link to={`/${id}/${cat.id}`} className="dropdown-item" key={cat.id}>
+                                            {cat.name}
+                                        </Link>
+                                    )
+                                })
+                                }
                             </ul>
                         </li>
                         <li className="nav-item">

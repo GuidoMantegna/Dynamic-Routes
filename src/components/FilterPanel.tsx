@@ -56,7 +56,6 @@ const FilterPanel: React.FC<Props> = ({ results, data, handleFilters }) => {
         }
 
         handleFilters(filteredArray)
-        console.log(filteredArray)
     }
 
     return (
