@@ -3,20 +3,19 @@ import { Link, useParams } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 
 type Data = {
-    id: string, 
-    name: string
+    name: string,
+    categories: {id: string, name: string}[],
+    currencies: {id: string, symbol: string}[]
 }
 
-const Navbar: React.FC/*<Props>*/ = (/*{ data, id }*/) => {
+const Navbar: React.FC = () => {
 
     const { id } = useParams<{id: string}>();
 
-    const [data, setData] = useState<Data[]>([]);
+    const [data, setData] = useState<Data>();
 
     useEffect(() => {
-        fetchData(`https://api.mercadolibre.com/sites/${id}/categories`)
-
-        // contextData.id = id;
+        fetchData(`https://api.mercadolibre.com/sites/${id}`)
     }, [])
 
     async function fetchData(url:string) {
@@ -53,17 +52,20 @@ const Navbar: React.FC/*<Props>*/ = (/*{ data, id }*/) => {
                 <div className="collapse navbar-collapse flex-grow-0" id="navbarSupportedContent">
                     <ul className="navbar-nav me-auto mb-2 mb-lg-0">
                         <li className="nav-item">
-                            <a className="nav-link active" aria-current="page" href="#">Home</a>
+                            <Link to={`/${id}`} className="nav-link active" aria-current="page">Home</Link>
                         </li>
                         <li className="nav-item">
-                            <a className="nav-link" href="#">Link</a>
+                            <i className="bi bi-geo-alt nav-link">{data?.name}</i>
+                        </li>
+                        <li className="nav-item">
+                            <span className="nav-link">{data?.currencies[0].id}{data?.currencies[0].symbol}</span>
                         </li>
                         <li className="nav-item dropdown">
                             <a className="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                 Categorias
                             </a>
                             <ul className="dropdown-menu" aria-labelledby="navbarDropdown">
-                                {data.map(cat => {
+                                {data?.categories.map(cat => {
                                     return (
                                         <Link to={`/${id}/${cat.id}`} className="dropdown-item" key={cat.id}>
                                             {cat.name}
@@ -73,9 +75,7 @@ const Navbar: React.FC/*<Props>*/ = (/*{ data, id }*/) => {
                                 }
                             </ul>
                         </li>
-                        <li className="nav-item">
-                            <a className="nav-link disabled" href="#" tabIndex={-1} aria-disabled="true">Disabled</a>
-                        </li>
+                        
                     </ul>
                 </div>
             </div>

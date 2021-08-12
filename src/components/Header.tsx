@@ -33,7 +33,9 @@ const Header: React.FC<Props> = ({ handleSearch, section }) => {
     return (
         <header className="container-fluid d-flex justify-content-center">
             <div className="container-sm row align-items-center py-3 px-0 m-0">
-                <img src={logo} className="img-fluid col-3 col-md-2 p-1" alt="logo" id="logo"></img>
+                <Link to='/' className="col-3 col-md-2 p-1">
+                    <img src={logo} className="img-fluid" alt="logo" id="logo"></img>
+                </Link>
 
                 <form className="col-9 col-md-10 d-inline-flex px-2" onSubmit={handleSubmit}>
                     <input className="form-control" onChange={handleChange}ref={searchRef} type="search" placeholder="Buscá productos, marcas y más..." aria-label="Search"></input>

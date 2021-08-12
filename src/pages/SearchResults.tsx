@@ -7,6 +7,8 @@ import SorterPanel from '../components/SorterPanel';
 import ResulstList from '../components/ResulstList';
 import Navbar from "../components/Navbar";
 import Header from "../components/Header";
+import PageError from '../components/PageError';
+import PageLoading from '../components/PageLoading';
 
 const SearchResults = () => {
 
@@ -14,16 +16,28 @@ const SearchResults = () => {
 
     const [data, setData] = useState<Data[]>();
     const [filteredData, setFilteredData] = useState<Data[] | undefined>([]);
+    const [status, setStatus] = useState('idle');
+    const [error, setError] = useState(null);
 
     useEffect(() => {
         fetchData(`https://api.mercadolibre.com/sites/${id}/search?q=${search}`)
     }, [])
 
-    async function fetchData(url:string) {
-        const getData = await fetch(url);
-        const data = await getData.json();
-        
-        setData(data.results)
+    async function fetchData(url: string) {
+        setStatus('pending');
+        setError(null)
+
+        try {
+            const getData = await fetch(url);
+            const data = await getData.json();
+            setData(data.results);
+            
+            setStatus('resolved')
+        }
+        catch (error) {
+            setStatus('rejected')
+            setError(error)
+        }
     }
 
     const handleFilters = (data: Data[]) => {
@@ -44,22 +58,20 @@ const SearchResults = () => {
         <>
         <Header handleSearch={handleSearch} section="search-results"/>
         <Navbar/>
-        {/* <nav aria-label="breadcrumb">
-            <ol className="breadcrumb m-3">
-                <li className="breadcrumb-item"><a href="#">Home</a></li>
-                <li className="breadcrumb-item"><a href="#">Categorias</a></li>
-                <li className="breadcrumb-item active" aria-current="page">{data?.name}</li>
-            </ol>
-        </nav> */}
-        <div className="row">
-            <div className="col-3 ps-4 pe-0 mt-3">
-                <FilterPanel results={results} data={data} handleFilters={handleFilters}/>
-            </div>
+        <div className="pages-main-container">
+            {status === 'pending' && <PageLoading/>}
+            {status === 'rejected' && <PageError error={error}/>}
+            {status === 'resolved' &&
+            <div className="row">
+                <div className="col-3 ps-4 pe-0 mt-3">
+                    <FilterPanel results={results} data={data} handleFilters={handleFilters}/>
+                </div>
 
-            <div className="col-9">
-                <SorterPanel results={results} data={data} handleSorters={handleSorters} />
-                <ResulstList results={results} />
-            </div>
+                <div className="col-9">
+                    <SorterPanel results={results} data={data} handleSorters={handleSorters} />
+                    <ResulstList results={results} />
+                </div>
+            </div>}
         </div>
         </>
     );

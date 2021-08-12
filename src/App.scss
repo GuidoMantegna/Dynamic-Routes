@@ -18,5 +18,10 @@ ul {
 
 li {
   list-style: none;
-  
+}
+
+.pages-main-container {
+  background-color: colors.$grey;
+  position: relative;
+  min-height: 100vh;
 }

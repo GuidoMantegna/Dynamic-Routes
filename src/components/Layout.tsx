@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { IdProvider } from '../contexts/Contexts';
+// import { IdProvider } from '../contexts/DataProvider';
 import Header from './Header';
 import Navbar from './Navbar';
 import './styles/Layout.scss'
@@ -18,14 +18,14 @@ const Layout: React.FC = ({children}) => {
     //     setIds(id)
     // }
 
-    const providerValue = {
-        id: ''
-        // handleId: handleId
-    }
+    // const providerValue = {
+    //     id: ''
+    //     // handleId: handleId
+    // }
 
     return (
         <div className="Layout_main-container min-vh-100">
-            <IdProvider value={providerValue}>
+            {/* <IdProvider value={providerValue}> */}
                 {/* <Header /> */}
                 {/* <Navbar /> */}
                 <nav aria-label="breadcrumb">
@@ -37,9 +37,9 @@ const Layout: React.FC = ({children}) => {
                 <div className="">
                     {children}
                 </div>
-            </IdProvider>
+            {/* </IdProvider> */}
         </div>
     );
 };
 
-export default Layout;
+export default Layout

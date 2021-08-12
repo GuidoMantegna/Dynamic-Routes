@@ -1,5 +1,6 @@
 import '../pages/styles/SearchResults.scss';
 import { Data } from '../interfaces/Data';
+import { useParams } from 'react-router-dom';
 
 type Props = {
     results: Data[] | undefined;
@@ -8,6 +9,8 @@ type Props = {
 }
 
 const FilterPanel: React.FC<Props> = ({ results, data, handleFilters }) => {
+
+    const {search} = useParams<{search: string}>()
 
     const filterFunc = (value: string | undefined, arr: Data[] | undefined) => {
         let newArr;
@@ -61,7 +64,7 @@ const FilterPanel: React.FC<Props> = ({ results, data, handleFilters }) => {
     return (
         <>
         <div className="filter-option-container">
-            <p className="filter-title">Search Title</p>
+            <p className="filter-title">{search}</p>
             
             <div>
                 <span className="filter-qty ms-0 me-2">{results?.length}</span>  
