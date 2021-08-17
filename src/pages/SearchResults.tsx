@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { useParams } from 'react-router';
 import './styles/SearchResults.scss';
 import { Data } from '../interfaces/Data'
@@ -7,6 +7,8 @@ import SorterPanel from '../components/SorterPanel';
 import ResulstList from '../components/ResulstList';
 import Navbar from "../components/Navbar";
 import Header from "../components/Header";
+import PageError from '../components/PageError';
+import PageLoading from '../components/PageLoading';
 
 const SearchResults = () => {
 
@@ -14,28 +16,50 @@ const SearchResults = () => {
 
     const [data, setData] = useState<Data[]>();
     const [filteredData, setFilteredData] = useState<Data[] | undefined>([]);
+    const [status, setStatus] = useState('idle');
+    const [error, setError] = useState(null);
 
     useEffect(() => {
         fetchData(`https://api.mercadolibre.com/sites/${id}/search?q=${search}`)
     }, [])
 
-    async function fetchData(url:string) {
-        const getData = await fetch(url);
-        const data = await getData.json();
-        
-        setData(data.results)
+    async function fetchData(url: string) {
+        setStatus('pending');
+        setError(null)
+
+        try {
+            const getData = await fetch(url);
+            const data = await getData.json();
+            setData(data.results);
+            
+            setStatus('resolved')
+        }
+        catch (error) {
+            setStatus('rejected')
+            setError(error)
+        }
     }
 
     const handleFilters = (data: Data[]) => {
         setFilteredData(data)
     }
 
+
     const handleSorters = (data: Data[]) => {
-        setFilteredData(data)
+        setFilteredData(Array.from(data))
     }
 
     const handleSearch = (searchKey: string) => {
         fetchData(`https://api.mercadolibre.com/sites/${id}/search?q=${searchKey}`);
+    }
+
+    const filterBTN = useRef<HTMLSpanElement>(null);
+    const filterPanel = useRef<HTMLDivElement>(null);
+    
+    const openFilterPanel = (e: React.MouseEvent) => {
+        
+        filterPanel.current?.classList.toggle("filter-panel-hidden"); 
+        filterBTN.current?.classList.toggle("panel-btn-open"); 
     }
 
     const results = filteredData?.length === 0 ? data : filteredData
@@ -44,22 +68,21 @@ const SearchResults = () => {
         <>
         <Header handleSearch={handleSearch} section="search-results"/>
         <Navbar/>
-        {/* <nav aria-label="breadcrumb">
-            <ol className="breadcrumb m-3">
-                <li className="breadcrumb-item"><a href="#">Home</a></li>
-                <li className="breadcrumb-item"><a href="#">Categorias</a></li>
-                <li className="breadcrumb-item active" aria-current="page">{data?.name}</li>
-            </ol>
-        </nav> */}
-        <div className="row">
-            <div className="col-3 ps-4 pe-0 mt-3">
-                <FilterPanel results={results} data={data} handleFilters={handleFilters}/>
-            </div>
+        <div className="pages-main-container">
+            {status === 'pending' && <PageLoading/>}
+            {status === 'rejected' && <PageError error={error}/>}
+            {status === 'resolved' &&
+            <div className="row m-0">
+                <div className="filter-panel filter-panel-hidden col-8 col-md-3 ps-5 pe-0 pt-3 mt-md-3" ref={filterPanel}>
+                    <div className='filter-btn' onClick={openFilterPanel}><span ref={filterBTN} className="panel-btn-close">{'>'}</span></div>
+                    <FilterPanel results={results} data={data} handleFilters={handleFilters}/>
+                </div>
 
-            <div className="col-9">
-                <SorterPanel results={results} data={data} handleSorters={handleSorters} />
-                <ResulstList results={results} />
-            </div>
+                <div className="sorter-panel col-12 col-md-9 p-0">
+                    <SorterPanel results={results} handleSorters={handleSorters} />
+                    <ResulstList results={results} />
+                </div>
+            </div>}
         </div>
         </>
     );

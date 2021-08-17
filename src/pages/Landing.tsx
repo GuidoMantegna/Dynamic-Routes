@@ -20,14 +20,14 @@ const Landing = () => {
     ];
 
     return (
-        <div className='landing container-fluid m-0 row align-items-center'>
-            <div className="col-7">
+        <div className='landing container-fluid pt-3 m-0 row align-items-center justify-content-center'>
+            <div className="col-5 col-md-7 col-lg-4 p-md-5">
                 <img 
                     src="https://static.mlstatic.com/org-img/homesnw/img/ml-logo@2x.png?v=4.0" 
                     alt="main-logo"
                     className="img-fluid"/>
             </div>
-            <ul className="col-5">
+            <ul className="col-7 col-md-5 col-lg-4 p-md-5">
                 {countrys.map(country => {
                     return (
                         <li key={country.id}>

@@ -1,4 +1,5 @@
 export interface Data {
+
     id: string,
     name: string;
     thumbnail: string,
@@ -12,4 +13,7 @@ export interface Data {
         rate: number,
         quantity: number,
     },
+
+    picture: string;
+    children_categories: {name: string; id:string}[]
 }

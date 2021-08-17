@@ -1,60 +1,59 @@
 import { Data } from '../interfaces/Data';
+import { useState } from 'react';
 
 type Props = {
     results: Data[] | undefined;
-    data: Data[] | undefined;
     handleSorters(data: Data[] | undefined): void;
 }
 
-const SorterPanel: React.FC<Props> = ({ data, results, handleSorters }) => {
+const SorterPanel: React.FC<Props> = ({ results, handleSorters }) => {
 
-    let isOpen = false;
+    const [currentSort, setCurrentSort] = useState('Elegir')
 
-    const handleClick = (e: React.MouseEvent<HTMLSelectElement>) => {
+    const handleClick = (e: React.MouseEvent) => {
         const {value} = e.target as typeof e.target & {
             value: string;
         };
 
-        if (!isOpen) {
-            isOpen = true;
-        } else {
-            switch (value) {
-                case 'mas-vendido':
-                    handleSorters(data?.sort((a, b) => b.sold_quantity - a.sold_quantity))
+        switch (value) {
+                case 'Mas vendido':
+                    handleSorters(results?.sort((a, b) => b.sold_quantity - a.sold_quantity))
                     break;
-                case 'menos-vendido':
-                    handleSorters(data?.sort((a, b) => a.sold_quantity - b.sold_quantity))
+                case 'Menos vendido':
+                    handleSorters(results?.sort((a, b) => a.sold_quantity - b.sold_quantity))
                     break;
-                case 'menor-precio':
-                    handleSorters(data?.sort((a, b) => a.price - b.price))
+                case 'Menor precio':
+                    handleSorters(results?.sort((a, b) => a.price - b.price))
                     break;            
                 default:
-                    handleSorters(data?.sort((a, b) => b.price - a.price))
+                    handleSorters(results?.sort((a, b) => b.price - a.price))
                     break;
             }
-
-            isOpen = false
-        } 
-
-
+        setCurrentSort(value)
     }
 
     return (
-        <>
+        <>        
         <div className="container">
             <div className="results-sort mb-1">
-                <label htmlFor="ordenar-por" className="strong">Ordenar por</label>
-                <select onClick={handleClick} name="ordenar-por" id="sorting-options" className="border-0 ms-2">
-                    <option  value="mayor-precio">Mayor precio</option>
-                    <option value="menor-precio">Menor precio</option>
-                    <option value="mas-vendido">Mas vendido</option>
-                    <option value="menos-vendido">Menos vendido</option>
-                </select>
+                <label htmlFor="ordenar-por" className="small">Ordenar por</label>
+                <div className="btn-group">
+                    <button type="button" className="sorter-toggler dropdown-toggle small" data-bs-toggle="dropdown" data-bs-display="static" aria-expanded="false">
+                        {currentSort}
+                    </button>
+                    <ul className="dropdown-menu dropdown-menu-end p-0">
+                        <li><button onClick={handleClick} className="dropdown-item small border-bottom" type="button" value="Mas vendido">Mas vendido</button></li>
+                        <li><button onClick={handleClick} className="dropdown-item small border-bottom" type="button" value="Menos vendido">Menos vendido</button></li>
+                        <li><button onClick={handleClick} className="dropdown-item small border-bottom" type="button" value="Menor precio">Menor precio</button></li>
+                        <li><button onClick={handleClick} className="dropdown-item small" type="button" value="Mayor precio">Mayor precio</button></li>
+                    </ul>
+                </div>
             </div>
-            
-        </div>   
+        </div>
         </>
     );
 };
 
 export default SorterPanel;
+
+
