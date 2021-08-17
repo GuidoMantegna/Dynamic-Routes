@@ -77,9 +77,8 @@ const FilterPanel: React.FC<Props> = ({ results, data, handleFilters }) => {
             <div className="d-flex">
                 <label className="filter-option">Gratis</label>
                 <span className="filter-qty">
-                    ({filterFunc('gratis', data)?.length})
+                    ({filterFunc('gratis', results)?.length})
                 </span>
-                {/* <input className="input-filter" type="checkbox" name="gratis" id="gratis" onClick={handleClick} /> */}
                 <div className="form-check form-switch ms-2">
                     <input className="form-check-input input-filter" type="checkbox" data-info="gratis" id="flexSwitchCheckDefault" onClick={handleClick}></input>
                 </div>
@@ -92,9 +91,8 @@ const FilterPanel: React.FC<Props> = ({ results, data, handleFilters }) => {
             <div className="d-flex">
                 <label className="filter-option">Nuevo</label>
                 <span className="filter-qty">
-                    ({filterFunc('nuevo', data)?.length})
+                    ({filterFunc('nuevo', results)?.length})
                 </span>
-                {/* <input className="input-filter" type="checkbox" name="nuevo" id="nuevo" onClick={handleClick} /> */}
                 <div className="form-check form-switch ms-2">
                     <input className="form-check-input input-filter" type="checkbox" data-info="nuevo" id="flexSwitchCheckDefault" onClick={handleClick}></input>
                 </div>
@@ -102,9 +100,8 @@ const FilterPanel: React.FC<Props> = ({ results, data, handleFilters }) => {
             <div className="d-flex">
                 <label className="filter-option">Usado</label> 
                 <span className="filter-qty">
-                    ({filterFunc('usado', data)?.length})
+                    ({filterFunc('usado', results)?.length})
                 </span>
-                {/* <input className="input-filter" type="checkbox" name="usado" id="usado" onClick={handleClick}/> */}
                 <div className="form-check form-switch ms-2">
                     <input className="form-check-input input-filter" type="checkbox" data-info="usado" id="flexSwitchCheckDefault" onClick={handleClick}></input>
                 </div>
@@ -117,9 +114,8 @@ const FilterPanel: React.FC<Props> = ({ results, data, handleFilters }) => {
             <div className="d-flex">
                 <label className="filter-option">Sin interés</label> 
                 <span className="filter-qty">
-                    ({filterFunc('sin interes', data)?.length})
+                    ({filterFunc('sin interes', results)?.length})
                 </span>
-                {/* <input className="input-filter" type="checkbox" name="sin interes" id="sin interes" onClick={handleClick} /> */}
                 <div className="form-check form-switch ms-2">
                     <input className="form-check-input input-filter" type="checkbox" data-info="sin interes" id="flexSwitchCheckDefault" onClick={handleClick}></input>
                 </div>
@@ -127,9 +123,8 @@ const FilterPanel: React.FC<Props> = ({ results, data, handleFilters }) => {
             <div className="d-flex">
                 <label className="filter-option">0-6</label>
                 <span className="filter-qty">  
-                    ({filterFunc('0-6', data)?.length})
+                    ({filterFunc('0-6', results)?.length})
                 </span>    
-                {/* <input className="input-filter" type="checkbox" name="0-6" id="0-6" onClick={handleClick} /> */}
                 <div className="form-check form-switch ms-2">
                     <input className="form-check-input input-filter" type="checkbox" data-info="0-6" id="flexSwitchCheckDefault" onClick={handleClick}></input>
                 </div>
@@ -137,9 +132,8 @@ const FilterPanel: React.FC<Props> = ({ results, data, handleFilters }) => {
             <div className="d-flex">
                 <label className="filter-option">12 o más</label> 
                 <span className="filter-qty">
-                    ({filterFunc('6 o mas', data)?.length})
+                    ({filterFunc('6 o mas', results)?.length})
                 </span> 
-                {/* <input className="input-filter" type="checkbox" name="12 0 mas" id="12 o mas" onClick={handleClick} /> */}
                 <div className="form-check form-switch ms-2">
                     <input className="form-check-input input-filter" type="checkbox" data-info="6 o mas" id="flexSwitchCheckDefault" onClick={handleClick}></input>
                 </div>

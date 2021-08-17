@@ -1,9 +1,72 @@
 @use '../../styles/modules/colors';
 
+// FILTER PANEL //
+.filter-panel {
+    position: fixed;
+    height: fit-content;
+    background-color: rgba(60, 60, 60, .90);
+    border-bottom-right-radius: 10px;
+    transition: transform 0.5s;
+
+    p {
+        color: colors.$yellow;
+        font-weight: 600;
+        font-size: 16px;
+        margin-bottom: 10px;
+        line-height: 1.25;
+    }
+    label {
+        color: rgb(255, 255, 255);
+        font-weight: 400;
+        font-size: 14px;
+        margin-left: 0;
+        white-space: nowrap;
+    }
+    span {
+        color: rgb(230, 230, 230);
+        font-size: 14px;
+        font-weight: 300;
+        margin-left: 6px;
+    } 
+    
+}
+.filter-panel-hidden {
+    transform: translateX(-100%);
+}
+.panel-btn-open {
+    transform: rotate(180deg);
+    transition: transform .5s;
+}
+.filter-btn {
+    position: absolute;
+    content: '';
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(60, 60, 60, .90);
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+    height: 100px;
+    width: 20px;
+    top: 38%;
+    right: -19px;
+
+    span {
+        font-weight: bold;
+        font-size: 20px;
+    }
+}
+
+// RESULTS LIST //
 .results-item {
-    // max-height: 200px;
     display: grid;
-    grid-template-columns: 15% 85%;
+    grid-template-columns: 20% 80%;
+}
+
+.item-img {
+    display: flex;
+    justify-content: center;
+    align-items: center
 }
 
 .results-sort {
@@ -31,24 +94,44 @@
 }
 
 .filter-title {
-    font-weight: 600;
-    font-size: 16px;
-    margin-bottom: 10px;
-    line-height: 1.25;
-    color: #333;
+    // font-weight: 600;
+    // font-size: 16px;
+    // margin-bottom: 10px;
+    // line-height: 1.25;
 }
 
 .filter-option {
-    color: #666;
-    font-weight: 400;
-    font-size: 14px;
-    margin-left: 0;
-    white-space: nowrap;
+    // font-weight: 400;
+    // font-size: 14px;
+    // margin-left: 0;
+    // white-space: nowrap;
 }
 
 .filter-qty {
-    font-size: 14px;
-    font-weight: 300;
-    color: #999;
-    margin-left: 6px;
+    // font-size: 14px;
+    // font-weight: 300;
+    // margin-left: 6px;
+}
+
+@media screen and (min-width: 768px) {
+    .filter-panel {
+        background-color:transparent;
+        position: static;
+
+        p {
+            color: #333;
+        }
+        label {
+            color: #666;
+        }
+        span {
+            color: #999;
+        }
+    }
+    .filter-panel-hidden {
+        transform: translateX(0);
+    }
+    .filter-btn {
+        display: none;
+    }
 }

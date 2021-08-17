@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { useParams } from 'react-router';
 import './styles/SearchResults.scss';
 import { Data } from '../interfaces/Data'
@@ -42,14 +42,26 @@ const SearchResults = () => {
 
     const handleFilters = (data: Data[]) => {
         setFilteredData(data)
+        console.log(data)
     }
 
+
     const handleSorters = (data: Data[]) => {
-        setFilteredData(data)
+        setFilteredData(() => data)
+        console.log(data)
     }
 
     const handleSearch = (searchKey: string) => {
         fetchData(`https://api.mercadolibre.com/sites/${id}/search?q=${searchKey}`);
+    }
+
+    const filterBTN = useRef<HTMLSpanElement>(null);
+    const filterPanel = useRef<HTMLDivElement>(null);
+    
+    const openFilterPanel = (e: React.MouseEvent) => {
+        
+        filterPanel.current?.classList.toggle("filter-panel-hidden"); 
+        filterBTN.current?.classList.toggle("panel-btn-open"); 
     }
 
     const results = filteredData?.length === 0 ? data : filteredData
@@ -62,12 +74,13 @@ const SearchResults = () => {
             {status === 'pending' && <PageLoading/>}
             {status === 'rejected' && <PageError error={error}/>}
             {status === 'resolved' &&
-            <div className="row">
-                <div className="col-3 ps-4 pe-0 mt-3">
+            <div className="row m-0">
+                <div className="filter-panel filter-panel-hidden col-8 col-md-3 ps-5 pe-0 pt-3 mt-md-3" ref={filterPanel}>
+                    <div className='filter-btn' onClick={openFilterPanel}><span ref={filterBTN} className="panel-btn-close">{'>'}</span></div>
                     <FilterPanel results={results} data={data} handleFilters={handleFilters}/>
                 </div>
 
-                <div className="col-9">
+                <div className="sorter-panel col-12 col-md-9 p-0">
                     <SorterPanel results={results} data={data} handleSorters={handleSorters} />
                     <ResulstList results={results} />
                 </div>

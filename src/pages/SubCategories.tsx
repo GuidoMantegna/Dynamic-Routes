@@ -63,7 +63,7 @@ const Category = () => {
                             <div className="card h-100">
                                 <img src={data.picture} className="card-img-top" alt="..."></img>
                                 <div className="card-body">
-                                <h5 className="card-title lead text-center text-dark">{cat.name}</h5>
+                                <h5 className="card-title lead fs-6 text-center text-dark">{cat.name}</h5>
                                 </div>
                             </div>
                         </Link>

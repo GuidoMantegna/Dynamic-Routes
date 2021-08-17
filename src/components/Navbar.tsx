@@ -28,14 +28,14 @@ const Navbar: React.FC = () => {
     return (
       <>
         <nav className="navbar navbar-expand-lg navbar-light">
-            <div className="container-fluid">
+            <div className="container">
 
                 <div className="d-flex align-items-center">
                     <i className="bi bi-person-circle nav-link text-secondary p-0"><span className="ms-1 fst-normal">USER</span></i>
-                    <a className="nav-link px-1 text-secondary" href="#">Compras</a>
-                    <a className="nav-link px-1 text-secondary" href="#">Favoritos</a>
-                    <a className="nav-link px-1 text-secondary" href="#"><i className="bi bi-bell"></i></a>
-                    <a className="nav-link px-1 text-secondary" href="#"><i className="bi bi-cart2"></i></a>
+                    <a className="nav-link px-1 text-secondary" >Compras</a>
+                    <a className="nav-link px-1 text-secondary" >Favoritos</a>
+                    <a className="nav-link px-1 text-secondary" ><i className="bi bi-bell"></i></a>
+                    <a className="nav-link px-1 text-secondary" ><i className="bi bi-cart2"></i></a>
                 </div>
 
                 <button 
@@ -61,10 +61,10 @@ const Navbar: React.FC = () => {
                             <span className="nav-link">{data?.currencies[0].id}{data?.currencies[0].symbol}</span>
                         </li>
                         <li className="nav-item dropdown">
-                            <a className="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <a className="nav-link dropdown-toggle" id="dropdownMenuButton2" role="button" data-bs-display="static" data-bs-toggle="dropdown" aria-expanded="false">
                                 Categorias
                             </a>
-                            <ul className="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <ul className="dropdown-menu dropdown-menu-dark p-4 dropdown-menu-lg-end" aria-labelledby="dropdownMenuButton2">
                                 {data?.categories.map(cat => {
                                     return (
                                         <Link to={`/${id}/${cat.id}`} className="dropdown-item" key={cat.id}>
