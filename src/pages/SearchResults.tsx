@@ -42,13 +42,11 @@ const SearchResults = () => {
 
     const handleFilters = (data: Data[]) => {
         setFilteredData(data)
-        console.log(data)
     }
 
 
     const handleSorters = (data: Data[]) => {
-        setFilteredData(() => data)
-        console.log(data)
+        setFilteredData(Array.from(data))
     }
 
     const handleSearch = (searchKey: string) => {
@@ -81,7 +79,7 @@ const SearchResults = () => {
                 </div>
 
                 <div className="sorter-panel col-12 col-md-9 p-0">
-                    <SorterPanel results={results} data={data} handleSorters={handleSorters} />
+                    <SorterPanel results={results} handleSorters={handleSorters} />
                     <ResulstList results={results} />
                 </div>
             </div>}

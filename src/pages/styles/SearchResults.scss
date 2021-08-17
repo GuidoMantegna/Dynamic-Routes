@@ -66,51 +66,36 @@
 .item-img {
     display: flex;
     justify-content: center;
-    align-items: center
+    align-items: center;
+
+    img {
+        max-height: 120px;
+    }
 }
 
+// SORTING PANEL
 .results-sort {
     display: flex;
     width: 100%;
     justify-content: flex-end;
+    align-items: center;
 
     label {
         font-weight: bold;
     }
+
 }
 
-#sorting-options {
-    background-color: colors.$grey;
+.sorter-toggler {
+    border: none;
+    background-color: transparent;
 }
 
-#sorting-options:focus {
-    outline: none;
-}
-
+// FILTER PANEL
 .filter-option-container {
     width: 100%;
     padding-right: 16px;
     margin-bottom: 30px;
-}
-
-.filter-title {
-    // font-weight: 600;
-    // font-size: 16px;
-    // margin-bottom: 10px;
-    // line-height: 1.25;
-}
-
-.filter-option {
-    // font-weight: 400;
-    // font-size: 14px;
-    // margin-left: 0;
-    // white-space: nowrap;
-}
-
-.filter-qty {
-    // font-size: 14px;
-    // font-weight: 300;
-    // margin-left: 6px;
 }
 
 @media screen and (min-width: 768px) {

@@ -10,7 +10,9 @@ type Props = {
 
 const FilterPanel: React.FC<Props> = ({ results, data, handleFilters }) => {
 
-    const {search} = useParams<{search: string}>()
+    const {id, search} = useParams<{id: string, search: string}>();
+
+    const sitesWithInstallments = ['MLA', 'MLC', 'MCO', 'MPE']
 
     const filterFunc = (value: string | undefined, arr: Data[] | undefined) => {
         let newArr;
@@ -108,6 +110,7 @@ const FilterPanel: React.FC<Props> = ({ results, data, handleFilters }) => {
             </div>
         </div>
 
+        {sitesWithInstallments.includes(id) &&
         <div className="filter-option-container">
             <p className="filter-title">Pago</p>
 
@@ -139,6 +142,7 @@ const FilterPanel: React.FC<Props> = ({ results, data, handleFilters }) => {
                 </div>
             </div>
         </div>
+        }
         </>
 
     );
