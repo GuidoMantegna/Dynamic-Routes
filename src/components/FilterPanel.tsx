@@ -12,29 +12,29 @@ const FilterPanel: React.FC<Props> = ({ results, data, handleFilters }) => {
 
     const {id, search} = useParams<{id: string, search: string}>();
 
-    const sitesWithInstallments = ['MLA', 'MLC', 'MCO', 'MPE']
+    // const sitesWithInstallments = ['MLA', 'MLC', 'MCO', 'MPE']
 
     const filterFunc = (value: string | undefined, arr: Data[] | undefined) => {
         let newArr;
 
         switch (value) {
             case 'gratis':
-                newArr = arr?.filter(item => item.shipping.free_shipping);
+                newArr = arr?.filter(item => item.shipping.free_shipping !== null ? item.shipping.free_shipping : false);
                 break;
             case 'nuevo':
-                newArr = arr?.filter(item => item.condition === 'new')
+                newArr = arr?.filter(item => item.condition !== null ? item.condition === 'new' : false)
                 break;
             case 'usado':
-                newArr = arr?.filter(item => item.condition !== 'new')
+                newArr = arr?.filter(item => item.condition !== null ? item.condition !== 'new' : false)
                 break;
             case 'sin interes':
-                newArr = arr?.filter(item => item.installments.rate === 0)
+                newArr = arr?.filter(item => item.installments !== null ? item.installments.rate === 0 : false)
                 break;
             case '0-6':
-                newArr = arr?.filter(item => item.installments.quantity <= 6)
+                newArr = arr?.filter(item => item.installments !== null ? item.installments.quantity <= 6 : false)
                 break;
             case '6 o mas':
-                newArr = arr?.filter(item => item.installments.quantity > 6)
+                newArr = arr?.filter(item => item.installments !== null ? item.installments.quantity >= 12 : false)
                 break;
             default:
                 handleFilters(data)
@@ -110,7 +110,7 @@ const FilterPanel: React.FC<Props> = ({ results, data, handleFilters }) => {
             </div>
         </div>
 
-        {sitesWithInstallments.includes(id) &&
+        {/* {sitesWithInstallments.includes(id) && */}
         <div className="filter-option-container">
             <p className="filter-title">Pago</p>
 
@@ -142,7 +142,7 @@ const FilterPanel: React.FC<Props> = ({ results, data, handleFilters }) => {
                 </div>
             </div>
         </div>
-        }
+        {/* } */}
         </>
 
     );
