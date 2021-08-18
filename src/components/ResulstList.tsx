@@ -18,9 +18,9 @@ const ResulstList: React.FC<Props> = ({ results }) => {
                             <h5 className="fw-light h6">{item.title}</h5>
                             <span className="h6"><strong>$ {new Intl.NumberFormat('de-DE').format(item.price)}</strong></span>
                             <p className="small">vendidos: <span>{item.sold_quantity}</span></p>
-                            {(item.installments.quantity >= 12 && item.installments.rate === 0) && 
+                            {(item.installments !== null && item.installments.quantity >= 12 && item.installments.rate === 0) && 
                             <span className="small text-success">Hasta 12 cuotas sin interés</span>}
-                            {(item.installments.quantity <= 6 && item.installments.rate === 0) && 
+                            {(item.installments !== null && item.installments.quantity <= 6 && item.installments.rate === 0) && 
                             <span className="small text-success">Hasta 6 cuotas sin interés</span>}
                             {item.shipping.free_shipping && <span className="small text-success">Envío gratis</span>}
                         </div>
