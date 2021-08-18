@@ -16,7 +16,7 @@ const Navbar: React.FC = () => {
 
     useEffect(() => {
         fetchData(`https://api.mercadolibre.com/sites/${id}`)
-    }, [])
+    }, [id])
 
     async function fetchData(url:string) {
         const getData = await fetch(url);
@@ -32,10 +32,10 @@ const Navbar: React.FC = () => {
 
                 <div className="d-flex align-items-center">
                     <i className="bi bi-person-circle nav-link text-secondary p-0"><span className="ms-1 fst-normal">USER</span></i>
-                    <a className="nav-link px-1 text-secondary" >Compras</a>
-                    <a className="nav-link px-1 text-secondary" >Favoritos</a>
-                    <a className="nav-link px-1 text-secondary" ><i className="bi bi-bell"></i></a>
-                    <a className="nav-link px-1 text-secondary" ><i className="bi bi-cart2"></i></a>
+                    <label className="nav-link px-1 text-secondary" >Compras</label>
+                    <label className="nav-link px-1 text-secondary" >Favoritos</label>
+                    <label className="nav-link px-1 text-secondary" ><i className="bi bi-bell"></i></label>
+                    <label className="nav-link px-1 text-secondary" ><i className="bi bi-cart2"></i></label>
                 </div>
 
                 <button 
@@ -61,9 +61,9 @@ const Navbar: React.FC = () => {
                             <span className="nav-link">{data?.currencies[0].id}{data?.currencies[0].symbol}</span>
                         </li>
                         <li className="nav-item dropdown">
-                            <a className="nav-link dropdown-toggle" id="dropdownMenuButton2" role="button" data-bs-display="static" data-bs-toggle="dropdown" aria-expanded="false">
+                            <label className="nav-link dropdown-toggle" id="dropdownMenuButton2" role="button" data-bs-display="static" data-bs-toggle="dropdown" aria-expanded="false">
                                 Categorias
-                            </a>
+                            </label>
                             <ul className="dropdown-menu dropdown-menu-dark p-4 dropdown-menu-lg-end" aria-labelledby="dropdownMenuButton2">
                                 {data?.categories.map(cat => {
                                     return (

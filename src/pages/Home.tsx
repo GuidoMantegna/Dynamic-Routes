@@ -16,7 +16,7 @@ const Home = () => {
 
     useEffect(() => {
         fetchData(`https://api.mercadolibre.com/sites/${id}/categories`)
-    }, [])
+    }, [id])
 
     async function fetchData(url: string) {
         setStatus('pending');

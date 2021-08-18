@@ -20,7 +20,7 @@ const Category = () => {
 
     useEffect(() => {
         fetchData(`https://api.mercadolibre.com/categories/${category}`)
-    }, [])
+    }, [category])
 
     async function fetchData(url: string) {
         setStatus('pending');
