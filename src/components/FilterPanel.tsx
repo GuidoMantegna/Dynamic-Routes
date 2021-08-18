@@ -10,7 +10,7 @@ type Props = {
 
 const FilterPanel: React.FC<Props> = ({ results, data, handleFilters }) => {
 
-    const {id, search} = useParams<{id: string, search: string}>();
+    const {search} = useParams<{search: string}>();
 
     // const sitesWithInstallments = ['MLA', 'MLC', 'MCO', 'MPE']
 
