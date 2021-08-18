@@ -21,7 +21,7 @@ const SearchResults = () => {
 
     useEffect(() => {
         fetchData(`https://api.mercadolibre.com/sites/${id}/search?q=${search}`)
-    }, [])
+    }, [id, search])
 
     async function fetchData(url: string) {
         setStatus('pending');
