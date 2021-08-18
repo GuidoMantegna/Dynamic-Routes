@@ -19,8 +19,8 @@ const Header: React.FC<Props> = ({ handleSearch, section }) => {
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault()
 
-        const search = searchRef.current?.value;
-        if(search !== '') {handleSearch(searchKey)}
+        // const search = searchRef.current?.value;
+        if(searchKey !== '') {handleSearch(searchKey)}
     }
 
     const handleChange = (e: React.ChangeEvent) => {
@@ -28,6 +28,7 @@ const Header: React.FC<Props> = ({ handleSearch, section }) => {
             value: string;
         };
         setSearchKey(value)
+        console.log(value)
     }
 
     return (
@@ -38,7 +39,7 @@ const Header: React.FC<Props> = ({ handleSearch, section }) => {
                 </Link>
 
                 <form className="col-9 col-md-10 d-inline-flex px-2" onSubmit={handleSubmit}>
-                    <input className="form-control" onChange={handleChange}ref={searchRef} type="search" placeholder="Buscá productos, marcas y más..." aria-label="Search"></input>
+                    <input className="form-control" value={searchKey} onChange={handleChange} ref={searchRef} type="search" placeholder="Buscá productos, marcas y más..." aria-label="Search"></input>
                     
                     {section === "search-results" &&
                     <button className="btn btn-link">
